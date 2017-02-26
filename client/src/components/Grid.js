@@ -9,6 +9,7 @@ class Grid extends Component {
 
     return (
       <div className="Grid">
+        <div className="Grid_Flex">
         {
           sortedCols.map(({id, title, words}) => {
             return (<Column key={_.uniqueId()} col_id={id} title={title} words={words} add={this.props.add}
@@ -16,6 +17,8 @@ class Grid extends Component {
                             removeFromGrid={this.props.removeFromGrid} />);
           })
         }
+
+        </div>
       </div>
     );
   }

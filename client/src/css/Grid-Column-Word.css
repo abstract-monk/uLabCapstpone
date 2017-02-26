@@ -1,54 +1,131 @@
 
-/*  Grid  Component*/
+/** Grid Component **/
+
 .Grid {
+  height: 400px;
+  /*overflow: scroll;*/
+
+  display:flex;
+
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  /* allow scrolling of flex container */
+  overflow-x:auto;
+
+}
+
+
+/* A Flex Container */
+.Grid_Flex {
+  /*display: inline-flex;*/
+  /*flex-flow: row nowrap;*/
+
+  /*justify-content: center; !* center cols *!*/
+
+
+  display: inherit;
+
+
+  /* tweak the where items line up on the row */
+  /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+  /*align-content: flex-start;*/
+
+
+
+
+
+  /*align-items: flex-start;*/
+  /*justify-content: center;*/
+
+  /*flex-flow: row nowrap;  !* column children (title, words) will go in a row & wrap *!*/
+
 
 }
 
 
 
-/*  Column Component  */
+/**  Column Component  **/
+
+
+
+/* A Flex Item and Container */
 .Column {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 10px;
+  background-color: khaki;
 
-  /*adds shadow to the columns*/
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.ColumnTitle {
-  /*margin: 5px 5px ;*/
-}
+  /*flex-basis: 12%;*/
+  /*!* control the width of the columns, max 20% *!*/
 
 
-/*   Word  Component  */
-.Word {
-  margin: auto;
-  width: 100px;
 
-  min-height: 50px;
-
-  /*use flexbox to center img &  word text*/
   display: flex;
-  flex-direction: column;
+
+  align-items: center;
   justify-content: center;
 
+  flex-flow: row wrap;  /* column children (title, words) will go in a row & wrap */
+
+  /* tweak the where items line up on the row */
+  /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+  align-content: flex-start;
 }
+
+
+.ColumnTitle {
+  width: 100%;  /* expand width of column */
+  /* AS FLEX ITEM */
+  order: 1;
+}
+
+
+
+/**   Word  Component  **/
+
+
+
+/* A Flex Item and Container */
+.Word {
+  background-color: pink;
+
+  width: 75px;
+  padding: 1%;
+
+  flex-direction: column;
+  justify-content: center; /* centers img & word text */
+  align-items: center; /* items are stacked to the cross start of the flex container */
+
+
+
+
+
+  /*flex-basis: 5%;*/
+
+  /*max-width: 100%;*/
+
+  /* AS ITEM */
+  order: 2;
+
+}
+
+/* A Flex Item */
+.Word img {  max-width: 100%;  }
+
+/* A Flex Item */
+.WordText {
+  padding-top: 5px;
+  font-size: 1.2em;
+}
+
+
+
 
 .Word:hover {
   background-color: #F5f5fa;
   color: red;
 }
 
-.Word img {
-  max-width: 100%;
-}
 
-.WordText {
-  padding-top: 5px;
-  font-size: 1.2em;
 
-}
 
 .DeleteButton {
   height: 20px;
