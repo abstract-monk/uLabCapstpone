@@ -30,6 +30,7 @@ class WordEditor extends Component {
       file: '',
       imagePreviewURL: '',
       selectedTitle: this.props.coreListTitles[0],
+      selectedVocabulary: "Core",
       wordText: '',
       imgUrl: '',
     };
@@ -141,6 +142,16 @@ class WordEditor extends Component {
                 </Col>
               </Row>
 
+	      <Row>
+	      <label>Add to Vocabulary: </label>
+	      <select classname="VocabTitles" defaultValue={this.state.selectedVocabulary}
+                      onChange={(e) => {this.setState({selectedVocabulary: e.target.value})}}>
+		      <option key="core" value="core">Core</option>
+		      <option key="fringe" value="fringe">Fringe</option>
+	      </select>
+	      </Row>
+
+
               <label>Add to List: </label>
 
               <select className="ListTitles" defaultValue={this.state.selectedTitle}
@@ -153,6 +164,7 @@ class WordEditor extends Component {
                   })
                 }
               </select>
+
             </form>
           </Col>
         </Row>
