@@ -88,6 +88,7 @@ class SettingsBar extends Component {
           onHide={this.props.close}>
           <WordEditor
             coreListTitles={this.props.coreListTitles}
+            fringeListTitles={this.props.fringeListTitles}
             close={this.props.close}
             handleAddNewWord={this.props.handleAddNewWord}/>
         </Modal>

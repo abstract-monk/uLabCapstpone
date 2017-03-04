@@ -49,6 +49,7 @@ class App extends Component {
     this.renderRemoveWordModal = this.renderRemoveWordModal.bind(this);
     this.callDeleteApi = this.callDeleteApi.bind(this);
     this.handleAddNewImage = this.handleAddNewImage.bind(this);
+    this.getFringeVocabTitles = this.getFringeVocabTitles.bind(this);
 
     // component render helper functions
     this.renderSettingsBar = this.renderSettingsBar.bind(this);
@@ -64,6 +65,7 @@ class App extends Component {
       colArray: [],
       messageArray: [],
       coreListTitles: [],
+      fringeListTitles: [],
       showModal: false,
       showDeleteModal: false,
       deleteWordText: "",
@@ -131,6 +133,23 @@ class App extends Component {
     this.setState({coreListTitles: listTitles});
   }
 
+  /**
+   * this function retrieves the titles of the core vocabulary from the DB
+   * and updates the states variable "fringeListTitles"
+   */
+  getFringeVocabTitles() {
+    let gridId = '2';
+    let listTitles = [];
+
+    $.getJSON('http://localhost:3001/api/grids/id/' + gridId)
+      .then((data) => {
+        _.forEach(data, function (value) {
+          listTitles.push(value.list_title);
+        });
+      })
+
+    this.setState({fringeListTitles: listTitles});
+  }
 
   // Updates the colArray with the next column
   appendToCols(nextCol) {
@@ -269,7 +288,7 @@ class App extends Component {
       ]
     });
   }
-  
+
   /**
    * handleAddNewImage()
    * {API POST CALL}
@@ -284,7 +303,7 @@ class App extends Component {
       data: formData
     })
   }
-  
+
   /**
    * callDeleteApi(word_id, list_id)
    * {API DELETE CALL}
@@ -360,7 +379,7 @@ class App extends Component {
                    buttonSize={this.state.buttonSize} resizeButton={this.resizeButton}
                    open={this.open} close={this.close} showModal={this.state.showModal}
                    coreListTitles={this.state.coreListTitles} handleAddNewWord={this.handleAddNewWord}
-                   handleAddNewImage={this.handleAddNewImage}/>
+                   handleAddNewImage={this.handleAddNewImage} fringeListTitles={this.state.fringeListTitles}/>
     )
   }
 

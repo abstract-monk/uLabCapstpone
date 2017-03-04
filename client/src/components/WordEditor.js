@@ -25,6 +25,7 @@ class WordEditor extends Component {
     this.setWordText = this.setWordText.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleImageChange = this._handleImageChange.bind(this);
+    this.addListDropDown = this.addListDropDown.bind(this);
 
     this.state = {
       file: '',
@@ -106,6 +107,42 @@ class WordEditor extends Component {
     this.setState({wordText: e.target.value});
   }
 
+   addListDropDown (){
+  	if (this.selectedVocabulary.localeCompare( "core") ){
+  		return (
+  			<div>
+  				 <select className="ListTitles" defaultValue={this.state.selectedTitle}
+                        onChange={(e) => {
+                          this.setState({selectedTitle: e.target.value})
+                        }}>
+                  {
+                    this.props.coreListTitles.map((title) => {
+                      return <option key={title} value={title}>{title}</option>
+                    })
+                  }
+                </select>
+
+  			</div>
+
+  		)
+  	}
+  	else if (this.selectedVocabulary.localeCompare( "fringe")){
+  	  return (
+        <div>
+          <select className="ListTitles" defaultValue={this.state.selectedTitle}
+                      onChange={(e) => {
+                        this.setState({selectedTitle: e.target.value})
+                      }}>
+                {
+                  this.props.fringeListTitles.map((title) => {
+                    return <option key={title} value={title}>{title}</option>
+                  })
+                }
+          </select>
+        </div>
+  		)
+  	}
+  }
 
   render() {
     let {imagePreviewUrl} = this.state;
@@ -144,7 +181,7 @@ class WordEditor extends Component {
 
 	      <Row>
 	      <label>Add to Vocabulary: </label>
-	      <select classname="VocabTitles" defaultValue={this.state.selectedVocabulary}
+	      <select className="VocabTitles" defaultValue={this.state.selectedVocabulary}
                       onChange={(e) => {this.setState({selectedVocabulary: e.target.value})}}>
 		      <option key="core" value="core">Core</option>
 		      <option key="fringe" value="fringe">Fringe</option>
@@ -154,16 +191,7 @@ class WordEditor extends Component {
 
               <label>Add to List: </label>
 
-              <select className="ListTitles" defaultValue={this.state.selectedTitle}
-                      onChange={(e) => {
-                        this.setState({selectedTitle: e.target.value})
-                      }}>
-                {
-                  this.props.coreListTitles.map((title) => {
-                    return <option key={title} value={title}>{title}</option>
-                  })
-                }
-              </select>
+                {this.addListDropDown}
 
             </form>
           </Col>
